@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -9,7 +9,11 @@
       content="Web site created using create-react-app"
     />
 
+
     <script src="https://raw.githack.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/ar.js@3.3.2/three.js/build/ar-threex.min.js"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
 
     <title>Indoor Navigation</title>
@@ -18,5 +22,45 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1"
+    />
+    <meta name="theme-color" content="#000000" />
+    <title>Indoor Navigation</title>
+
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
+
+    <!-- <script>
+      (function() {
+        const AScene = customElements.get('a-scene');
+        if (AScene && AScene.prototype) {
+          AScene.prototype.disconnectedCallback = function() {
+            // no-op: prevents React unmount from trying to dispose A-Frame’s renderer
+          };
+        }
+      })();
+    </script> -->
+
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/ar.js@3.3.2/three.js/build/ar-threex.min.js"></script> -->
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/three.js/build/ar-threex.min.js"></script> -->
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script defer src="%PUBLIC_URL%/static/js/bundle.js"></script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
   </body>
 </html>

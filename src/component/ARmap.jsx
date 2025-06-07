@@ -78,7 +78,7 @@ const ARScene = () => {
       } else {
         clearInterval(interval);
       }
-    }, 10000 / (pathPoints.length * 4)); // Movement duration
+    }, 2000 / (pathPoints.length * 4)); // Movement duration
 
     return () => clearInterval(interval);
   }, []);

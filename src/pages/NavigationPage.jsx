@@ -2,10 +2,14 @@ import  { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { ARButton } from "three/addons/webxr/ARButton.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { useNavigate } from 'react-router-dom';
+
 
 const NavigationPage = () => {
   const containerRef = useRef();
   const [distance, setDistance] = useState(0);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     let camera, scene, renderer, controller, originGroup;
@@ -139,11 +143,16 @@ const NavigationPage = () => {
         const angleY = Math.atan2(direction.x, direction.z);
         console.log("angle", angleY);
 
-            gltfLoader.load("/models/direction_arrows.glb", (gltf) => {
+          gltfLoader.load("/models/direction_arrows.glb", (gltf) => {
           const arrowModel = gltf.scene.clone();
           arrowModel.position.set(x, y, z);
           arrowModel.scale.set(0.02, 0.02, 0.02);
           arrowModel.rotation.y = angleY + Math.PI/2 ;
+          arrowModel.traverse((child) => {
+            if (child.isMesh) {
+              child.material = new THREE.MeshBasicMaterial({ color: 0x9370DB });
+            }
+          });
 
           console.log("rotation", arrowModel.rotation.y);
 
@@ -151,7 +160,7 @@ const NavigationPage = () => {
           if (x < 0) {
             arrowModel.traverse((child) => {
               if (child.isMesh) {
-                child.material = new THREE.MeshStandardMaterial({ color: 0xe64a19 }); // RGB(230, 74, 25)
+                child.material = new THREE.MeshStandardMaterial({ color: 0xe64a19 });
               }
             });
 
@@ -184,6 +193,11 @@ const NavigationPage = () => {
         const model = gltf.scene;
         model.position.set(x, y + 0.1, z);
         model.scale.set(0.02, 0.02, 0.02);
+        model.traverse((child) => {
+            if (child.isMesh) {
+              child.material = new THREE.MeshBasicMaterial({ color: 0x4B0082 });
+            }
+        });
         originGroup.add(model);
 
         const spriteMaterial = new THREE.SpriteMaterial({
@@ -193,6 +207,8 @@ const NavigationPage = () => {
         const sprite = new THREE.Sprite(spriteMaterial);
         sprite.position.set(x, y + 0.2, z);
         sprite.scale.set(0.3, 0.1, 1);
+
+
         originGroup.add(sprite);
       });
     };
@@ -203,7 +219,7 @@ const NavigationPage = () => {
       canvas.height = height;
 
       const context = canvas.getContext("2d");
-      context.fillStyle = "rgb(231, 70, 70)";
+      context.fillStyle = "#4B0082";
       context.font = "16px Arial";
       context.textAlign = "center";
       context.fillText(text, width / 2, height / 2 + 6);
@@ -218,7 +234,7 @@ const NavigationPage = () => {
 
       const context = canvas.getContext("2d");
       context.clearRect(0, 0, canvas.width, canvas.height);
-      context.fillStyle = "rgb(16, 6, 27)";
+      context.fillStyle = "rgb(43, 5, 83)";
       context.fillRect(0, 0, canvas.width, canvas.height);
       context.fillStyle = "white";
       context.font = "bold 18px Arial";
@@ -253,7 +269,7 @@ const NavigationPage = () => {
     const updateDistanceDisplay = (distance) => {
       const context = distanceTexture.image.getContext("2d");
       context.clearRect(0, 0, 128, 32);
-      context.fillStyle = "rgb(16, 6, 27)";
+      context.fillStyle = "rgb(43, 5, 83)";
       context.fillRect(0, 0, 128, 32);
       context.fillStyle = "white";
       context.font = "bold 18px Arial";
@@ -295,7 +311,10 @@ const NavigationPage = () => {
   }, []);
 
   return (
-    <div ref={containerRef}> </div>
+    <div ref={containerRef}>
+      <button type="button" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 " onClick={() => navigate('/recognition')}> Change Destination </button>
+
+     </div>
   );
 };
 

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaMoon, FaSun, FaTwitterSquare } from "react-icons/fa";
+
 import ARmap from '../component/ARmap';
 
 
@@ -35,8 +37,8 @@ const HomePage = () => {
   const handleStartAR = () => navigate('/recognition');
   const toggleDarkMode = () => setIsDark(!isDark);
 
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', isDark);
+useEffect(() => {
+    document.body.classList.toggle("dark", isDark);
   }, [isDark]);
 
   return (
@@ -47,12 +49,33 @@ const HomePage = () => {
         <h1 className="text-3xl font-bold text-violet-700 dark:text-violet-400">
           AR Indoor Navigation
         </h1>
-        <button
+        {/* <button
           onClick={toggleDarkMode}
           className="text-sm border px-3 py-1.5 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 transition box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;"
         >
-          {isDark ? '☀ Light Mode' : '🌙 Dark Mode'}
-        </button>
+          {isDark ? '☀  ' : '🌙  '}
+        </button> */}
+        <div className="relative">
+        <input
+          type="checkbox"
+          id="checkbox"
+          checked={isDark}
+          onChange={() => setIsDark(!isDark)}
+          className="sr-only"
+        />
+        <label
+          htmlFor="checkbox"
+          className="bg-black w-[50px] h-[26px] rounded-full flex justify-between items-center p-1 cursor-pointer relative"
+        >
+          <FaMoon className="text-yellow-400" />
+          <FaSun className="text-orange-400" />
+          <span
+            className={`absolute top-[2px] left-[2px] bg-white w-[22px] h-[22px] rounded-full transition-transform duration-200 ${
+              isDark ? "translate-x-6" : ""
+            }`}
+          ></span>
+        </label>
+      </div>
       </div>
 
 

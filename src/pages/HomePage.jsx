@@ -122,12 +122,12 @@ useEffect(() => {
       <div className="max-w-6xl mx-auto mb-16">
         <h2 className="text-xl font-semibold mb-4">Watch it in action</h2>
         <video
-          src="/demo/ar-navigation-demo.mp4" // Replace with actual file
+          src = "video/XRecorder_Edited_20250708_01.mp4"
           controls
           autoPlay
           loop
           muted
-          className="rounded-xl w-full shadow-md"
+          className="rounded-xl w-full h-dvh shadow-md"
         />
       </div>
 
